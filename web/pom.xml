@@ -8,7 +8,7 @@
     </parent>
 	<groupId>com.robin.workflow</groupId>
     <artifactId>web</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>web</name>
     <url>http://maven.apache.org</url>
 
@@ -17,6 +17,65 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.robin</groupId>
+            <artifactId>base-example</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-vfs2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hive</groupId>
+                    <artifactId>hive-jdbc</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hbase</groupId>
+                    <artifactId>hbase-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hbase</groupId>
+                    <artifactId>hbase-server</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hbase</groupId>
+                    <artifactId>hbase-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.oracle</groupId>
+                    <artifactId>ojdbc14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.datastax.cassandra</groupId>
+                    <artifactId>cassandra-driver-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>tomcat</groupId>
+                    <artifactId>jasper-compiler</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>tomcat</groupId>
+                    <artifactId>jasper-runtime</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!-- Apache commons start -->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -79,11 +138,7 @@
             <artifactId>com.springsource.javax.persistence</artifactId>
         </dependency>
         <!-- Spring end -->
-        
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -105,10 +160,7 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.xeustechnologies</groupId>
-            <artifactId>jcl-core</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -122,14 +174,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -138,34 +183,7 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-vfs2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjlib</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.scannotation</groupId>
-            <artifactId>scannotation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.anarres.lzo</groupId>
-            <artifactId>lzo-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.anarres.lzo</groupId>
-            <artifactId>lzo-hadoop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.xerial.snappy</groupId>
-            <artifactId>snappy-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.tukaani</groupId>
-            <artifactId>xz</artifactId>
-        </dependency>
+
         
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -184,6 +202,48 @@
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-bpmn-model</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
 
     </dependencies>
 
@@ -193,12 +253,27 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*</exclude>
-                </excludes>
+
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8086</port>
+                    <path>/workflow</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <finalName>workflow</finalName>
+                    <server>tomcat7</server>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -238,80 +313,6 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.wvengen</groupId>
-                <artifactId>proguard-maven-plugin</artifactId>
-                <version>2.0.14</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <proguardVersion>5.1</proguardVersion>
-                    <injar>core-1.0-SNAPSHOT.jar</injar>
-                    <addMavenDescriptor>true</addMavenDescriptor>
-                    <injarNotExistsSkip>true</injarNotExistsSkip>
-                    <libs>
-                        <lib>${java.home}/lib/rt.jar</lib>
-                    </libs>
-
-                    <options> <!-- Detail see ProGuard Config -->
-
-                        <option>-keepattributes Signature,InnerClasses,Exceptions,SourceFile,LineNumberTable,*Annotation*</option>
-                        <option>
-                            <![CDATA[-keep public class * {public protected <fields>;public protected <methods>;}]]></option>
-                        <option>-keep public class * implements java.io.Serializable{public protected private *;}
-                        </option>
-
-                        <option>-keep public class * extends com.robin.core.base.model.BaseObject{ public protected
-                            private *; }
-                        </option>
-                        <option>-keep enum * { *; }</option>
-
-                        <option><![CDATA[-keepclassmembers enum * {
-							<fields>;
-							public static **[] values();
-    						public static ** valueOf(java.lang.String);
-						}]]></option>
-                        <option><![CDATA[-keepclassmembers class * implements org.apache.commons.dbutils.ResultSetHandler {
-							<methods>;
-							}]]></option>
-                        <option><![CDATA[-keepclassmembers class * implements org.springframework.orm.hibernate3.HibernateCallback {
-							<methods>;
-							}]]></option>
-                        <option><![CDATA[-keepclassmembers class * implements org.springframework.jdbc.core.RowMapper {
-							<methods>;
-							}]]></option>
-                        <option><![CDATA[-keepclassmembers class * extends com.robin.core.query.extractor.SplitPageResultSetExtractor {
-							<methods>;
-							}]]></option>
-                        <option><![CDATA[-keepclassmembers class * implements org.springframework.jdbc.core.ResultSetExtractor {
-							<methods>;
-							}]]></option>
-                        <option><![CDATA[-keepclassmembers class * implements java.util.Comparator {
-							<methods>;
-							}]]></option>
-                        <option><![CDATA[-keepclassmembers class * implements org.springframework.jdbc.core.PreparedStatementSetter {
-							<methods>;
-							}]]></option>
-                        <option>-ignorewarnings</option>
-                        <option>-dontshrink</option>
-                        <option>-printmapping out.map</option>
-                        <option>-optimizations !code/allocation/variable</option>
-                        <option>-keep class **.package-info</option>
-                        <option>-keep public class com.robin.core.base.**</option>
-                        <option>
-                            -keepclasseswithmembers public class * {
-                            public static void main(java.lang.String[]);
-                            }
-                        </option>
-                    </options>
                 </configuration>
             </plugin>
         </plugins>

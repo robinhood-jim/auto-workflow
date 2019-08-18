@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+      
+    <!-- JDBC DataSource -->
+   <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+      <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxLifetime" value="20"/>
+
+    </bean>
+    <bean id="dataSourceCore" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbccore.url}"/>
+        <property name="username" value="${jdbccore.username}"/>
+        <property name="password" value="${jdbccore.password}"/>
+        <property name="maxLifetime" value="20"/>
+
+    </bean>
+     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">                                        
+        <property name="dataSource" ref="dataSource"/>                                        
+    </bean>
+
+    <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="false" />
+    <bean id="sqlGen" class="com.robin.core.sql.util.MysqlSqlGen" autowire="byName"></bean>
+    <bean id="queryFactory" class="com.robin.core.query.util.QueryFactory" autowire="byName">
+    	<property name="xmlConfigPath" value="classpath:config/queryConfig" />
+    </bean>
+	<bean id="springInit" class="com.robin.core.base.spring.SpringContextHolder"  ></bean>
+	<context:component-scan base-package="com.robin" />
+	<bean id="jdbcDao" class="com.robin.core.base.dao.JdbcDao" autowire="byName" />
+
+    <bean id="jdbcDaoCore" class="com.robin.core.base.dao.JdbcDao">
+        <property name="dataSource" ref="dataSourceCore" />
+        <property name="queryFactory" ref="queryFactory" />
+        <property name="sqlGen" ref="sqlGen" />
+        <property name="lobHandler" ref="lobHandler" />     </bean>
+    <!--Cache -->
+    <cache:annotation-driven cache-manager="cacheManager" />
+
+    <bean id="lettuceConnectionFactory" class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory">
+        <constructor-arg index="0" value="127.0.0.1" />
+        <constructor-arg index="1" value="6379" />
+    </bean>
+
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" factory-method="create">
+        <constructor-arg ref="lettuceConnectionFactory" />
+    </bean>
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"  lazy-init="false">
+        <property name="basename" value="messages" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="useCodeAsDefaultMessage" value="true" />
+    </bean>
+</beans>
