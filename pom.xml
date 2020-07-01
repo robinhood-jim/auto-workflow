@@ -94,7 +94,7 @@
         <vfs.version>2.0</vfs.version>
         <compress.version>1.18</compress.version>
         <helix.version>0.6.5</helix.version>
-        <quartz.version>2.2.1</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <oracle.version>10.2.0.4.0</oracle.version>
         <sqlserver.version>4.0</sqlserver.version>
         <aspectj.version>1.6.2</aspectj.version>
